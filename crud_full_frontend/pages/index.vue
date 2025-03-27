@@ -2,7 +2,10 @@
 
 <script setup>
 onMounted(async () => {
-  const res = await $fetch("http://localhost:4000/task/all");
+  const id = 1;
+  const res = await $fetch(`/api/v1/task/${id}`, {
+    method: "GET",
+  });
   console.log(res);
 });
 </script>

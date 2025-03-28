@@ -1,5 +1,13 @@
 <template>
-  <div class="layout-header-style bg-primary-white"></div>
+  <div class="layout-header-style bg-primary-white">
+    <div class="flex flex-column w-50">
+      <span class="f-s-16 f-w-600 color-primary">FULL STACK TASK</span>
+      <span class="f-s-10 f-w-500 color-gray">WITH NUXT JS AND NEST JS</span>
+    </div>
+    <div class="flex justify-end w-50">
+      <IconsPlusCircle class="cursor-pointer" />
+    </div>
+  </div>
 </template>
 
 <script setup></script>

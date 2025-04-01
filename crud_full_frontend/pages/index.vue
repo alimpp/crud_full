@@ -16,16 +16,28 @@
       :data="data"
       @updateTask="updateTask"
       @deleteTask="deleteTask"
+      @infoTask="infoTask"
     />
   </div>
+  <DrawersTaskInfo
+    :data="task"
+    :isOpen="drawerState"
+    @close="drawerState = false"
+  />
 </template>
 
 <script setup>
 import { TasksControllerModule } from "@/controllers/tasks";
 import { TasksStoreModule } from "@/stores/tasks";
 
+const drawerState = ref(false);
+
 const dataSource = computed(() => {
   return TasksStoreModule.tasks.value;
+});
+
+const task = computed(() => {
+  return TasksStoreModule.task.value;
 });
 
 const updateTask = async (data) => {
@@ -38,6 +50,11 @@ const updateTask = async (data) => {
 
 const deleteTask = async (data) => {
   await TasksControllerModule.deleteTask(data.id);
+};
+
+const infoTask = async (id) => {
+  await TasksControllerModule.getTaskById(id);
+  drawerState.value = true;
 };
 
 onMounted(async () => {

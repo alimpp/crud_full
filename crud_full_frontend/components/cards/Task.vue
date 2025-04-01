@@ -9,7 +9,7 @@
     <div class="flex w-100 justify-end">
       <div class="w-50 flex">
         <IconsTrash class="cursor-pointer" @click="emit('deleteTask', data)" />
-        <IconsText class="cursor-pointer" />
+        <IconsText class="cursor-pointer" @click="emit('infoTask', data.id)" />
         <IconsCheckCircle
           @click="emit('updateTask', data)"
           v-if="!data.status"
@@ -28,7 +28,7 @@
 </template>
 
 <script setup>
-const emit = defineEmits(["deleteTask", "updateTask"]);
+const emit = defineEmits(["deleteTask", "updateTask", "infoTask"]);
 const props = defineProps({
   data: {
     type: Object,

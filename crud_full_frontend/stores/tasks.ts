@@ -12,11 +12,28 @@ interface ITask {
   starus: boolean;
 }
 
+interface ISingleTask {
+  title: string;
+  description: string;
+  starus: boolean;
+  id: number;
+}
+
 export class TasksModule {
   public tasks = ref<ITask[]>([]);
+  public task = ref<ISingleTask>({
+    title: "",
+    description: "",
+    starus: false,
+    id: 0,
+  });
 
   public async getAllTask(tasks: ITask[]): Promise<void> {
     this.tasks.value = tasks;
+  }
+
+  public async getTask(task: ISingleTask): Promise<void> {
+    this.task.value = task;
   }
 
   public async addTask(task: ICreateTask): Promise<void> {

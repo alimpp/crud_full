@@ -43,6 +43,21 @@ export class TasksController extends BaseAppModule {
     }
   }
 
+  public async getTaskById(id: number): Promise<void> {
+    try {
+      const response: any = await $fetch(`/api/v1/task/${id}`, {
+        method: "GET",
+      });
+
+      if (response?.data) {
+        await TasksStoreModule.getTask(response.data);
+        BaseAppStoreElementModule.loading.value = false;
+      }
+    } catch (error) {
+      console.error("Failed to fetch tasks:", error);
+    }
+  }
+
   public async validateAddTask(task: ICreateTask) {
     const title = this.validLength(task.title, 5, 100);
     const description = this.validLength(task.description, 5, 200);

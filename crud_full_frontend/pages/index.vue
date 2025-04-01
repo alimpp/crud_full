@@ -1,6 +1,16 @@
 <template>
   <div class="flex justify-center flex-wrap w-100">
+    <div
+      class="flex flex-column justify-center align-center w-100 h-90-dvh"
+      v-if="dataSource.length === 0"
+    >
+      <span class="f-s-16 f-w-600 color-primary"> TASK LIST IS EMPTY </span>
+      <span class="f-s-12 f-w-500 color-gray"
+        >Lorem ipsum dolor, sit amet consectetur adipisicing elit</span
+      >
+    </div>
     <CardsTask
+      v-else
       v-for="data in dataSource"
       :key="data.id"
       :data="data"

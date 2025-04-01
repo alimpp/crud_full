@@ -1,7 +1,7 @@
 <template>
   <div
     class="fade-animation w-300-px border-rounded flex flex-column mx-5 mt-5 px-10 py-10 border-custom"
-    :class="{ 'bg-success-low': data.status, 'bg-danger-low': !data.status }"
+    :class="{ 'bg-success': data.status, 'bg-danger-low': !data.status }"
     :key="data.id"
   >
     <span class="f-s-14 f-w-500">{{ data.title }}</span>

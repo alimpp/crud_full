@@ -7,11 +7,11 @@ interface ICreateTask {
 }
 
 interface ITask {
-  id: number;
   title: string;
   description: string;
   starus: boolean;
 }
+
 export class TasksModule {
   public tasks = ref<ITask[]>([]);
 
@@ -22,6 +22,13 @@ export class TasksModule {
   public async addTask(task: ICreateTask): Promise<void> {
     await $fetch("/api/v1/task/add", {
       method: "POST",
+      body: task,
+    });
+  }
+
+  public async updateTask(id: number, task: ITask): Promise<void> {
+    await $fetch(`/api/v1/task/${id}`, {
+      method: "PATCH",
       body: task,
     });
   }

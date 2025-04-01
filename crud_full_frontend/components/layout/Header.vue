@@ -5,12 +5,14 @@
       <span class="f-s-10 f-w-500 color-gray">WITH NUXT JS AND NEST JS</span>
     </div>
     <div class="flex justify-end w-50">
-      <IconsPlusCircle class="cursor-pointer" />
+      <IconsPlusCircle class="cursor-pointer" @click="emit('addTask')" />
     </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+const emit = defineEmits(["addTask"]);
+</script>
 
 <style scoped>
 .layout-header-style {

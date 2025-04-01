@@ -1,5 +1,11 @@
 import { ref } from "vue";
 
+interface ICreateTask {
+  title: string;
+  description: string;
+  status: boolean;
+}
+
 interface ITask {
   id: number;
   title: string;
@@ -11,6 +17,13 @@ export class TasksModule {
 
   public async getAllTask(tasks: ITask[]): Promise<void> {
     this.tasks.value = tasks;
+  }
+
+  public async addTask(task: ICreateTask): Promise<void> {
+    await $fetch("/api/v1/task/add", {
+      method: "POST",
+      body: task,
+    });
   }
 }
 

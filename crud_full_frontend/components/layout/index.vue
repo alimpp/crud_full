@@ -2,7 +2,7 @@
   <div class="w-100 h-100-dvh default-layout-style bg-secondary-white">
     <div class="main-content">
       <div class="header-content">
-        <LayoutHeader />
+        <LayoutHeader @addTask="addTask" />
       </div>
       <div class="router-content">
         <NuxtPage />
@@ -10,6 +10,10 @@
     </div>
     <BasePageLoading v-if="pageLoading" />
     <BaseToastBar />
+    <ModalsAddTask
+      :isOpen="addTaskModalState"
+      @close="addTaskModalState = false"
+    />
   </div>
 </template>
 
@@ -19,6 +23,11 @@ import { BaseAppStoreElementModule } from "@/stores/baseApp";
 const pageLoading = computed(() => {
   return BaseAppStoreElementModule.loading.value;
 });
+
+const addTaskModalState = ref(false);
+const addTask = () => {
+  addTaskModalState.value = true;
+};
 </script>
 
 <style scoped>

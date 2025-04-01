@@ -1,5 +1,6 @@
 import { BaseAppModule, BaseAppStoreElementModule } from "@/stores/baseApp";
 import { TasksStoreModule } from "@/stores/tasks";
+import { ref } from "vue";
 
 interface ITask {
   id: number;
@@ -15,7 +16,35 @@ interface IResponse {
   data: ITask[];
 }
 
+interface ICreateTask {
+  title: string;
+  description: string;
+}
+
 export class TasksController extends BaseAppModule {
+  public createTaskError = ref<ICreateTask>({
+    title: "",
+    description: "",
+  });
+
+  public async validateAddTask(task: ICreateTask) {
+    const title = this.validLength(task.title, 5, 100);
+    const description = this.validLength(task.description, 5, 200);
+    if (!title.isValid) {
+      this.createTaskError.value.title = title.message || "";
+    }
+    if (!description.isValid) {
+      this.createTaskError.value.description = description.message || "";
+    }
+    if (title.isValid && description.isValid) {
+      this.createTaskError.value.title = "";
+      this.createTaskError.value.description = "";
+      await TasksStoreModule.addTask({ ...task, status: false });
+      await this.getAllTasks();
+      return true;
+    }
+  }
+
   public async getAllTasks(): Promise<void> {
     BaseAppStoreElementModule.loading.value = true;
     try {

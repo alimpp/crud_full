@@ -65,6 +65,11 @@ export class TasksController extends BaseAppModule {
     await TasksStoreModule.updateTask(id, task);
     await this.getAllTasks();
   }
+
+  public async deleteTask(id: number): Promise<void> {
+    await TasksStoreModule.deleteTask(id);
+    await this.getAllTasks();
+  }
 }
 
 export const TasksControllerModule = new TasksController();

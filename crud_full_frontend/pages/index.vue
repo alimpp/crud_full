@@ -27,7 +27,7 @@ const updateTask = async (data) => {
 };
 
 const deleteTask = async (data) => {
-  // await TasksControllerModule.deleteTask(data);
+  await TasksControllerModule.deleteTask(data.id);
 };
 
 onMounted(async () => {

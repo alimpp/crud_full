@@ -32,6 +32,12 @@ export class TasksModule {
       body: task,
     });
   }
+
+  public async deleteTask(id: number): Promise<void> {
+    await $fetch(`/api/v1/task/${id}`, {
+      method: "DELETE",
+    });
+  }
 }
 
 export const TasksStoreModule = new TasksModule();
